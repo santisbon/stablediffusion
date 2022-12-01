@@ -13,13 +13,13 @@ metadata:
   name: models-pv
 spec:
   storageClassName: localdisk
-  persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Retain
   capacity:
-    storage: 1Gi
+    storage: 30Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadOnlyMany
   hostPath:
-    path: /var/output
+    path: /var/sd-data
 
 ---
 
@@ -30,8 +30,8 @@ metadata:
 spec:
   storageClassName: localdisk
   accessModes:
-    - ReadWriteOnce
+    - ReadOnlyMany
   resources:
     requests:
-      storage: 100Mi
+      storage: 26Gi
 
