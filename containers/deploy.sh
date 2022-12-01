@@ -9,6 +9,7 @@ docker build \
 
 # Push it to your image repository
 docker push "${STABLEDIFFUSION_TAG}"
+
 mkdir -p ~/Downloads/models/midas_models
 # Download model weights for SD2.0-v and SD2.0-base (txt2img).
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/768-v-ema.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2/resolve/main/768-v-ema.ckpt
@@ -26,6 +27,8 @@ wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models
 kubectl create -f ./containers/localdisk-sc.yml
 # PersistentVolume
 kubectl create -f ./containers/models-volume.yml
+# PersistentVolumeClaim
+kubectl create -f ./containers/models-volume-claim.yml
 
 
 ########## TXT2IMG ##########
