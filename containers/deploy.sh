@@ -1,6 +1,3 @@
-# Create a ~/.env file like the one in the example shown in env.sh
-# Run this script (docker-build.sh) from the root folder of the GitHub repo
-
 source ./containers/env.sh
 
 # Build the Docker image
@@ -10,27 +7,26 @@ docker build \
   --file ./containers/Dockerfile \
   .
 
-# docker run -it --platform linux/amd64 --name mycontainer santisbon/stablediffusion-amd64
-
-# Download model weights (maybe use a local k8s volume?)
-# https://kubernetes.io/docs/concepts/storage/volumes/#local
-
+# Push it to your image repository
+docker push "${STABLEDIFFUSION_TAG}"
 mkdir -p ~/Downloads/models/midas_models
-
-# txt2img. Download model weights for SD2.0-v and SD2.0-base. 
+# Download model weights for SD2.0-v and SD2.0-base (txt2img).
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/768-v-ema.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2/resolve/main/768-v-ema.ckpt
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/512-base-ema.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2-base/resolve/main/512-base-ema.ckpt
-
-# img2img. Download the depth-conditional stable diffusion model 
+# Download the depth-conditional stable diffusion model (img2img) 
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/512-depth-ema.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2-depth/resolve/main/512-depth-ema.ckpt
 # and the dpt_hybrid MiDaS model weights. Place the dpt_hybrid MiDaS model weights in a folder midas_models.
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/midas_models/dpt_hybrid-midas-501f0c75.pt -nc https://github.com/intel-isl/DPT/releases/download/1_0/dpt_hybrid-midas-501f0c75.pt
-
-# Download upscaling weights
+# Download upscaling weights.
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/x4-upscaler-ema.ckpt -nc  https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler/resolve/main/x4-upscaler-ema.ckpt
-
-# Download the SD 2.0-inpainting checkpoint
+# Download the SD 2.0-inpainting checkpoint.
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/512-inpainting-ema.ckpt -nc  https://huggingface.co/stabilityai/stable-diffusion-2-inpainting/resolve/main/512-inpainting-ema.ckpt
+
+# StorageClass
+kubectl create -f ./containers/localdisk-sc.yml
+# PersistentVolume
+kubectl create -f ./containers/models-volume.yml
+
 
 ########## TXT2IMG ##########
 
