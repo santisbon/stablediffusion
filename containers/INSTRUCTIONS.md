@@ -34,14 +34,21 @@ Run the script **from the root directory** of the git repo.
 ./containers/deploy.sh
 ```
 
+To delete everything
+```Shell
+kubectl delete -f ./containers/objects.yml
+```
+
 ## Verification
 
 Check the status of the PersistentVolume and PersistentVolumeClaim to verify that they have been bound.  
 Check the pods.
 ```Shell
+kubectl get sc -n stablediffusion
 kubectl get pv
-kubectl get pvc
-kubectl get pods -n stablediffusion
+kubectl get pvc -n stablediffusion
+kubectl get pod -n stablediffusion
+kubectl get deploy -n stablediffusion
 ```
 
 Default output locations:
