@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 source ./containers/env.sh
 
 # Build the Docker image.

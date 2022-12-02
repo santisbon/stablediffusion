@@ -1,0 +1,8 @@
+containers
+**/.cache
+**/.dockerignore
+**/.DS_Store
+**/.env
+**/.git
+**/.gitignore
+**/*.md

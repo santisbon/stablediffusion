@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-FILE=~/.env
+FILE=./containers/.env
 
 if [[ -f "$FILE" ]]; then
-  echo "Setting env variables from $FILE"
+  echo "Using $FILE to set environment variables..."
   
   # Export env vars using allexport option
   set -o allexport
   source "$FILE"
   set +o allexport
+
+  echo "Done."
 fi
