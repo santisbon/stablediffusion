@@ -2,14 +2,12 @@
 
 source ./containers/env.sh
 
-# Build the Docker image.
 docker build \
   --platform="${PLATFORM}" \
   --tag "${STABLEDIFFUSION_TAG}" \
   --file ./containers/Dockerfile \
   .
 
-# Push it to your image repository.
 docker push "${STABLEDIFFUSION_TAG}"
 
 mkdir -p ~/Downloads/models/midas_models
@@ -25,5 +23,5 @@ wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models
 # Download the SD 2.0-inpainting checkpoint.
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/512-inpainting-ema.ckpt -nc  https://huggingface.co/stabilityai/stable-diffusion-2-inpainting/resolve/main/512-inpainting-ema.ckpt
 
-# Deploy the app.
+kubectl create namespace stablediffusion
 kubectl apply -f containers/objects.yml -n stablediffusion
