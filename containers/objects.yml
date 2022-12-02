@@ -1,7 +1,7 @@
-apiVersion: storage.k8s.io/v1
 kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: localdisk
+  name: localdisk-sc
 provisioner: kubernetes.io/no-provisioner
 allowVolumeExpansion: true
 
@@ -12,26 +12,52 @@ apiVersion: v1
 metadata:
   name: models-pv
 spec:
-  storageClassName: localdisk
+  storageClassName: localdisk-sc
   persistentVolumeReclaimPolicy: Retain
   capacity:
     storage: 30Gi
   accessModes:
     - ReadOnlyMany
   hostPath:
-    path: /var/sd-data
+    path: /var/models
 
 ---
 
-apiVersion: v1
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
   name: models-pvc
 spec:
-  storageClassName: localdisk
+  storageClassName: localdisk-sc
   accessModes:
     - ReadOnlyMany
   resources:
     requests:
       storage: 26Gi
 
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sd-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stablediffusion
+  template:
+    metadata:
+      labels:
+        app: stablediffusion
+    spec:
+      containers:
+      - name: stablediffusion-c
+        image: santisbon/stablediffusion-amd64
+        #volumeMounts:
+        #- name: models-pv
+        #  mountPath: /app/models
+      #volumes:
+      #- name: models-pv
+      #  persistentVolumeClaim:
+      #    claimName: models-pvc
