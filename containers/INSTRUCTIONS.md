@@ -17,9 +17,8 @@ Run the script **from the root directory** of the git repo.
 ```Shell
 cat << EOF > ./containers/.env
 HUGGINGFACE_TOKEN=xxxxxxxxx
-ARCH=amd64
 PLATFORM=linux/amd64
-STABLEDIFFUSION_TAG=stablediffusion-amd64
+STABLEDIFFUSION_TAG=stablediffusion
 STABLEDIFFUSION_CONDA_ENV_FILE=environment.yaml
 STABLEDIFFUSION_GIT=Stability-AI/stablediffusion
 STABLEDIFFUSION_BRANCH=main
@@ -36,7 +35,7 @@ Run the script **from the root directory** of the git repo.
 
 To delete everything
 ```Shell
-kubectl delete -f ./containers/objects.yml
+kubectl delete -f ./containers/objects.yml -n sdspace
 ```
 
 ## Verification
@@ -44,12 +43,14 @@ kubectl delete -f ./containers/objects.yml
 Check the status of the PersistentVolume and PersistentVolumeClaim to verify that they have been bound.  
 Check the pods.
 ```Shell
-kubectl get sc -n stablediffusion
+kubectl get sc -n sdspace
 kubectl get pv
-kubectl get pvc -n stablediffusion
-kubectl get pod -n stablediffusion
-kubectl get deploy -n stablediffusion
+kubectl get pvc -n sdspace
+kubectl get pod -n sdspace
+kubectl get deploy -n sdspace
 ```
+
+## Use
 
 Default output locations:
 ```

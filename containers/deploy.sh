@@ -23,5 +23,5 @@ wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models
 # Download the SD 2.0-inpainting checkpoint.
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/512-inpainting-ema.ckpt -nc  https://huggingface.co/stabilityai/stable-diffusion-2-inpainting/resolve/main/512-inpainting-ema.ckpt
 
-kubectl create namespace stablediffusion
-kubectl apply -f containers/objects.yml -n stablediffusion
+kubectl create namespace sdspace
+kubectl apply -f containers/objects.yml -n sdspace
