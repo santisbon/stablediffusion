@@ -33,6 +33,12 @@ Run the script **from the root directory** of the git repo.
 ./containers/deploy.sh
 ```
 
+Populate models volume
+[Copy files to volume](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#cp)
+```Shell
+kubectl cp ~/Downloads/models sdspace/<some-pod>:/data
+```
+
 To delete everything
 ```Shell
 kubectl delete -f ./containers/objects.yml -n sdspace
