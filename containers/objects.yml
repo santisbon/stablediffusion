@@ -52,18 +52,18 @@ spec:
         app: stablediffusion
     spec:
       containers:
-      #- name: stablediffusion-c
-        #image: santisbon/stablediffusion
-        #volumeMounts:
-        #- name: models-pv
-        #  mountPath: /app/models
-      - name: debian-c
-        image: debian
-        command: ["tail"]
-        args: ["-f", "/dev/null"]  
+      - name: stablediffusion-c
+        image: santisbon/stablediffusion
         volumeMounts:
         - name: models-pv
-          mountPath: /data
+          mountPath: /app/models
+      #- name: debian-c
+      #  image: debian
+      #  command: ["tail"]
+      #  args: ["-f", "/dev/null"]  
+      #  volumeMounts:
+      #  - name: models-pv
+      #    mountPath: /data
       volumes:
       - name: models-pv
         persistentVolumeClaim:

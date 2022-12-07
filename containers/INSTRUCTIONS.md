@@ -55,6 +55,10 @@ kubectl get pvc -n sdspace
 kubectl get pod -n sdspace
 kubectl get deploy -n sdspace
 ```
+```Shell
+docker ps
+docker exec -it <container-id> bash
+```
 
 ## Use
 
