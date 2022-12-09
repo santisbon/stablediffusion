@@ -31,6 +31,8 @@ The `.env` file will be ignored by Docker so it won't go into the image. In prod
 Run the script **from the root directory** of the git repo.  
 ```Shell
 ./containers/deploy.sh
+# or
+./containers/deploy-aws.sh
 ```
 
 Populate models volume
