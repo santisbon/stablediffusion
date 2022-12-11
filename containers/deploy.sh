@@ -10,10 +10,9 @@ docker build \
 
 docker push "${STABLEDIFFUSION_TAG}"
 
-# Find the links:
+# Find the links to visit and for Hugging Face manually go get the real links that have "resolve" in the URL.
 # grep -i https://huggingface.co/stabilityai/stable-diffusion README.md > containers/links.txt
 # grep -i https://github.com/intel-isl/DPT/releases/download README.md > containers/links.txt
-
 # https://huggingface.co/stabilityai/stable-diffusion-2-1
 # https://huggingface.co/stabilityai/stable-diffusion-2-1-base
 # https://huggingface.co/stabilityai/stable-diffusion-2-depth
@@ -23,7 +22,7 @@ docker push "${STABLEDIFFUSION_TAG}"
 
 mkdir -p ~/Downloads/models/midas_models
 # Download model weights for _SD2.1-v_ and _SD2.1-base_ (txt2img).
-wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/v2-1_768-ema-pruned.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/v2-1_768-ema-pruned.ckpt
+wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/v2-1_768-ema-pruned.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/v2-1_512-ema-pruned.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2-1-base/resolve/main/v2-1_512-ema-pruned.ckpt
 # Download the depth-conditional stable diffusion model (img2img) 
 wget --header="Authorization: Bearer ${HUGGINGFACE_TOKEN}" -O ~/Downloads/models/512-depth-ema.ckpt -nc https://huggingface.co/stabilityai/stable-diffusion-2-depth/resolve/main/512-depth-ema.ckpt
