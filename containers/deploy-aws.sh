@@ -16,6 +16,8 @@ Based on:
 1. Deploy the AWS VPC and EKS control plane stack.
 2. Follow [Step 2: Configure your computer to communicate with your cluster](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html).
 3. Create EC2 key pair
-4. Deploy the [worker node stack]
-  [Managed node groups] (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html).
-  [Self-managed node groups](https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html).
+4. Deploy the worker node stack.  
+  [Managed node groups] (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html).  
+  [Self-managed node groups](https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html).  
+  [AMIs](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html).  
+  [Deep Learning Containers](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/deep-learning-containers-eks-setup.html).  
