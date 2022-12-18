@@ -164,4 +164,6 @@ cython_debug/
 .idea/
 .vscode/
 
+# draw.io
 *.bkp
+*.dtmp
